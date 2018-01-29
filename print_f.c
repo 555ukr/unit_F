@@ -6,7 +6,7 @@
 /*   By: dkalashn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 21:00:14 by dkalashn          #+#    #+#             */
-/*   Updated: 2018/01/22 17:12:56 by dkalashn         ###   ########.fr       */
+/*   Updated: 2018/01/26 16:43:14 by dkalashn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int					print_f(t_form *collect, va_list ap)
 		return (print_uint(collect, ap));
 	else if (collect->type == 'c' || collect->type == 'C')
 		return (print_char(collect, ap));
-	else if (collect->type == 'o' || collect->type == 'O')
+	else if (collect->type == 'o' || collect->type == 'O'
+			|| collect->type == 'b')
 		return (print_octal(collect, ap));
 	else if (collect->type == 'x' || collect->type == 'X')
 		return (print_hex(collect, ap));

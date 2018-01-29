@@ -6,13 +6,13 @@
 /*   By: dkalashn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:06:17 by dkalashn          #+#    #+#             */
-/*   Updated: 2018/01/24 13:19:16 by dkalashn         ###   ########.fr       */
+/*   Updated: 2018/01/29 12:39:10 by dkalashn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static char	*union_str(wchar_t *org)
+static char	*union_str(wchar_t *org, int *len)
 {
 	int		i;
 	char	*output;
@@ -27,11 +27,26 @@ static char	*union_str(wchar_t *org)
 	while (org[++i])
 	{
 		str2 = ft_putchar_uni_split(org[i]);
+		*len = ft_strlen(str2);
 		str1 = ft_strjoin(output, str2);
 		free(output);
 		free(str2);
 		output = str1;
 	}
+	return (output);
+}
+
+static char	*add_f(wchar_t *org, t_form *collect, int *len)
+{
+	char	*output;
+
+	collect->type = 's';
+	if (!org)
+		output = ft_strdup("(null)");
+	else
+		output = union_str(org, len);
+	if (collect->zero == 1 && collect->minus == 1)
+		collect->zero = 0;
 	return (output);
 }
 
@@ -41,18 +56,17 @@ static int	print_str_uni(t_form *collect, va_list ap)
 	char	*output;
 	char	*copy;
 	int		pad;
+	int		len;
 
-	collect->type = 's';
+	len = 1;
 	org = va_arg(ap, wchar_t *);
-	if (!org)
-		output = ft_strdup("(null)");
-	else
-		output = union_str(org);
-	if (collect->zero == 1 && collect->minus == 1)
-		collect->zero = 0;
+	output = add_f(org, collect, &len);
 	pad = (collect->zero == 0 ? ' ' : '0');
 	if (collect->preci && (int)ft_strlen(output) > collect->preci_value)
 	{
+		if (collect->preci_value % len != 0)
+			collect->preci_value = collect->preci_value -
+				collect->preci_value % len;
 		copy = ft_strsub(output, 0, collect->preci_value);
 		free(output);
 		output = copy;

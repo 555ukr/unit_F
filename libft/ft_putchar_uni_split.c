@@ -6,16 +6,16 @@
 /*   By: dkalashn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:35:38 by dkalashn          #+#    #+#             */
-/*   Updated: 2018/01/24 13:53:25 by dkalashn         ###   ########.fr       */
+/*   Updated: 2018/01/26 16:25:36 by dkalashn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			nbr_bit(unsigned int c)
+static unsigned int	nbr_bit(unsigned int c)
 {
 	unsigned int	nbr;
-	int				count;
+	unsigned int	count;
 
 	count = 1;
 	nbr = c;
@@ -31,7 +31,7 @@ static char			*add2_f(unsigned int c, char *output)
 {
 	unsigned char	o;
 	unsigned char	oct;
-	int				mask3;
+	unsigned int	mask3;
 
 	mask3 = 4034953344;
 	output = ft_memalloc(5);
@@ -52,7 +52,7 @@ static char			*add2_f(unsigned int c, char *output)
 
 static char			*add_f(unsigned int c, int bit, char *output)
 {
-	int				mask2;
+	unsigned int	mask2;
 	unsigned char	o;
 	unsigned char	oct;
 
@@ -78,7 +78,7 @@ static char			*add_f(unsigned int c, int bit, char *output)
 static char			*add_fun(unsigned int c, int bit, char *output, int mask1)
 {
 	unsigned char	o;
-	unsigned		oct;
+	unsigned int	oct;
 
 	if (bit <= 11 || MB_CUR_MAX < 3)
 	{
@@ -97,8 +97,8 @@ static char			*add_fun(unsigned int c, int bit, char *output, int mask1)
 
 char				*ft_putchar_uni_split(unsigned int c)
 {
-	int				bit;
-	int				mask1;
+	unsigned int	bit;
+	unsigned int	mask1;
 	char			*output;
 
 	mask1 = 49280;

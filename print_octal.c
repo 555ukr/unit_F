@@ -6,7 +6,7 @@
 /*   By: dkalashn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 20:57:53 by dkalashn          #+#    #+#             */
-/*   Updated: 2018/01/22 17:14:01 by dkalashn         ###   ########.fr       */
+/*   Updated: 2018/01/26 16:42:47 by dkalashn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ static char		*hash_f(t_form *collect, char *output)
 static char		*plus_uf(t_form *collect, unsigned long long num)
 {
 	char	*output;
+	int		base;
 
+	base = (collect->type == 'b' ? 2 : 8);
 	if (collect->space && (collect->plus || collect->preci))
 		collect->space = 0;
 	output = ((num == 0 && collect->preci && !collect->preci_value)
-				? ft_memalloc(1) : ft_itoa_base(num, 8));
+				? ft_memalloc(1) : ft_itoa_base(num, base));
 	if (output[0] != '0')
 		output = hash_f(collect, output);
 	return (output);
